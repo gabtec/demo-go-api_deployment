@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-go-api
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-go-api
+  template:
+    metadata:
+      labels:
+        app: demo-go-api
+    spec:
+      containers:
+        - name: demo-go-api
+          image: gabtec/demo-go-api
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: 125m
+              memory: 250Mi
+            limits:
+              cpu: 250m
+              memory: 500Mi
