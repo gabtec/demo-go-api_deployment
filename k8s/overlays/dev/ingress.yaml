@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: demo-go-api.gabtec.fun
+    - host: demo-go-api.gabtec.online
       http:
         paths:
           - path: /
@@ -23,5 +23,5 @@ spec:
                   number: 3000
   tls:
     - hosts:
-        - demo-go-api.gabtec.fun
-      secretName: demo-go-api-gabtec-fun-tls # will be auto created
+        - demo-go-api.gabtec.online
+      secretName: demo-go-api-gabtec-online-tls # will be auto created
