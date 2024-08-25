@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-api-dev
+  annotations:
+    cert-manager.io/acme-challenge-type: http01
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: demo-api.beta.gabtec.pt
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: demo-go-api
+                port:
+                  number: 3000
+  tls:
+    - hosts:
+        - demo-api.beta.gabtec.pt
+      secretName: demo-api--beta-gabtec-pt-tls # will be auto created
